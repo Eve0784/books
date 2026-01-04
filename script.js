@@ -1,9 +1,14 @@
-import { getBooks } from "./shared/app-bookshelf.js";
+import { getBooks, searchBooks} from "./shared/app-bookshelf.js";
 
 // 📊 Estado de paginación
 let allBooks = [];
 let currentPage = 0;
+let apiPage = 1;
+let totalBooks = 0;
 const BOOKS_PER_PAGE = 10;
+let filteredBooks = [];
+
+// 🖼️ Renderizar libros en el estante
 
 function displayBooks(books) {
     console.log('📚 Libros recibidos:', books);
@@ -45,7 +50,7 @@ function displayBooks(books) {
 
         const bookMeta = document.createElement('p');
         bookMeta.classList.add('book-meta');
-        bookMeta.textContent = `ID: ${book.id} | Dowmloads: ${book.download_count || 0}`;
+        bookMeta.textContent = `ID: ${book.id} | Downloads: ${book.download_count || 0}`;
 
         const bookDescription = document.createElement('p');
         bookDescription.classList.add('book-description');
@@ -62,18 +67,14 @@ function displayBooks(books) {
         bookInfo.appendChild(bookSumary);
         bookCard.appendChild(bookInfo);
         shelf.appendChild(bookCard);
-        const linkDiv = document.createElement('div');
-        linkDiv.classList.add('link-div');
+    
         const detailLink = document.createElement('a');
         detailLink.classList.add('detail-link');
         detailLink.href = `./detail-book/book-detail.html?bookId=${book.id}`;
-        detailLink.textContent = '🠊';
-        linkDiv.appendChild(detailLink);
+        detailLink.textContent = '➡️';
+        bookCard.appendChild(detailLink);
 
-        shelf.appendChild(linkDiv);
-
-
-
+        shelf.appendChild(bookCard);
         container.appendChild(shelf);
     }
 
@@ -82,7 +83,7 @@ function displayBooks(books) {
 }
 
 function updatePaginationControls() {
-    const totalPages = Math.ceil(allBooks.length / BOOKS_PER_PAGE);
+    const totalPages = Math.ceil(totalBooks / BOOKS_PER_PAGE);
     const paginationContainer = document.getElementById('pagination-controls');
 
     if (!paginationContainer) {
@@ -102,7 +103,9 @@ function updatePaginationControls() {
     nextBtn.disabled = currentPage >= totalPages - 1;
 }
 
+// ➡️ Crear controles de paginación
 function createPaginationControls() {
+    // Botón anterior ⬅️
     const prevBtn = document.getElementById('prev-btn');
 
     prevBtn.addEventListener('click', () => {
@@ -112,10 +115,10 @@ function createPaginationControls() {
         }
     });
 
-    // Botón siguiente
+    // Botón siguiente ➡️
     const nextBtn = document.getElementById('next-btn');
     nextBtn.addEventListener('click', () => {
-        const totalPages = Math.ceil(allBooks.length / BOOKS_PER_PAGE);
+        const totalPages = Math.ceil(totalBooks / BOOKS_PER_PAGE);
         if (currentPage < totalPages - 1) {
             currentPage++;
             loadPage(currentPage);
@@ -128,14 +131,43 @@ function createPaginationControls() {
 function loadPage(pageNumber) {
     const start = pageNumber * BOOKS_PER_PAGE;
     const end = start + BOOKS_PER_PAGE;
-    const booksToDisplay = allBooks.slice(start, end);
 
-    // Scroll suave hacia arriba
+    if (end > allBooks.length) {
+        apiPage++;
+        getBooks(apiPage).then(data => {
+            allBooks = allBooks.concat(data.results);
+            displayBooks(allBooks.slice(start, end));
+            updatePaginationControls();
+        });
+        return;
+    }
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
-
-    displayBooks(booksToDisplay);
+    displayBooks(allBooks.slice(start, end));
 }
 
+function filterBooks(searchTerm) {
+    const term = searchTerm.trim();
+
+    if (term === '') {
+        currentPage = 0;
+        loadPage(0);
+        return;
+    }
+
+    searchBooks(term)
+        .then(data => {
+            filteredBooks = data.results;
+            currentPage = 0;
+            displayBooks(filteredBooks.slice(0, BOOKS_PER_PAGE));
+        })
+        .catch(err => console.error('❌ Error búsqueda:', err));
+}
+// 🔍 Manejar búsqueda
+const searchInput = document.getElementById('search-input');
+searchInput.addEventListener('input', (e) => {
+    filterBooks(e.target.value);    
+});
 // 🚀 Inicialización
 getBooks()
     .then(data => {
@@ -149,7 +181,12 @@ getBooks()
         }
 
         // Guardar todos los libros
+        totalBooks = data.count;
         allBooks = data.results;
+        currentPage = 0;
+
+        console.log(`📚 Total libros disponibles: ${totalBooks}`);
+        console.log('📚 Libros cargados:', allBooks);
 
         // Mostrar primera página
         createPaginationControls();

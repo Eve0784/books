@@ -1,1 +1,36 @@
 @import url('../shared/shared-style.css');
+
+.book-detail-container {
+    position: relative;
+    max-width: 1200px;   /* mejor que 1400 */
+    width: 100%;
+    margin: 1.5rem auto;
+    padding: 3rem 2.5rem;
+    background: #fdfaf5;
+    border-radius: 6px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+}
+/* 
+@media (max-width: 1024px) {
+    .book-detail-container {
+        padding: 2.5rem 2rem;
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 600px) {
+    .book-detail-container {
+        padding: 1.5rem 1.25rem;
+        margin: 1rem;
+        max-width: 100%;
+        border-radius: 4px;
+    }
+
+    .book-detail-container::before {
+        transform: translate(4px, 4px);
+    }
+
+    .book-detail-container::after {
+        transform: translate(8px, 8px);
+    }
+} */

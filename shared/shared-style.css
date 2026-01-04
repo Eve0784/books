@@ -12,19 +12,32 @@ body {
 }
 
 header {
+    height: 120px;
+    width: 100%;
     background: rgba(20, 10, 5, 0.9);
     background-image: url('../assets/bookshelf-background.png');
+    background-repeat: repeat-x;
     background-size:contain;
     background-position: center;
-    padding: 2rem;
+    padding: 20px;
     text-align: center;
     border-bottom: 3px solid #361803;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 header h1 {
-    font-size: 4rem;
+    font-size:clamp(2rem, 5vw, 4rem);
     color: #cdbb80;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     letter-spacing: 2px;
+}
+
+@media (max-width: 768px) {
+    header{
+        height: 100px;
+        padding: 10px;
+    }
+    header h1 {
+        font-size: 4rem;
+    }
 }
