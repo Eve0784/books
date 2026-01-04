@@ -2,35 +2,249 @@
 
 .book-detail-container {
     position: relative;
-    max-width: 1200px;   /* mejor que 1400 */
-    width: 100%;
+    max-width: 900px;
+    width: 95%;
     margin: 1.5rem auto;
     padding: 3rem 2.5rem;
     background: #fdfaf5;
     border-radius: 6px;
     box-shadow: 0 12px 30px rgba(0,0,0,0.35);
 }
-/* 
+
+/* Título del libro */
+.book-title {
+    text-align: center;
+    margin-bottom: 0.5rem;
+    font-size: 2.2rem;
+    color: #222;
+    font-family: 'Georgia', serif;
+}
+
+/* Autor del libro */
+.book-author {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+    color: #666;
+    font-style: italic;
+}
+
+/* Contenedor de cada página */
+.book-page {
+    min-height: 500px;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+    font-family: 'Georgia', serif;
+    color: #333;
+    font-size: 1.1rem;
+    padding: 1rem;
+    overflow: visible;
+}
+
+/* Estilo de párrafos dentro del contenido */
+.book-page p {
+    margin-bottom: 0.8rem;
+    text-indent: 2rem;
+    text-align: justify;
+}
+
+.book-page p:first-of-type {
+    text-indent: 0;
+}
+
+/* Footer con navegación */
+.book-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: 0.2rem;
+    padding-top: 1rem;
+    border-top: 2px solid #e5e0d6;
+}
+
+.book-footer button {
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border: 2px solid #8b4513;
+    border-radius: 6px;
+    background-color: #e5e0d6;
+    color: #8b4513;
+    transition: all 0.3s;
+    font-weight: bold;
+}
+
+.book-footer button:hover:not(:disabled) {
+    background-color: #8b4513;
+    color: #fdfaf5;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.book-footer button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* Número de página */
+.page-number {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #8b4513;
+    min-width: 100px;
+    text-align: center;
+}
+
+/* ============================================ */
+/* RESPONSIVE DESIGN - TABLET */
+/* ============================================ */
 @media (max-width: 1024px) {
     .book-detail-container {
+        max-width: 85%;
         padding: 2.5rem 2rem;
-        max-width: 90%;
+        margin: 1.5rem auto;
+    }
+    
+    .book-title {
+        font-size: 2rem;
+    }
+    
+    .book-author {
+        font-size: 1.1rem;
+    }
+    
+    .book-page {
+        font-size: 1.05rem;
+        line-height: 1.5;
+        min-height: 450px;
     }
 }
 
-@media (max-width: 600px) {
+/* ============================================ */
+/* RESPONSIVE DESIGN - MOBILE */
+/* ============================================ */
+@media (max-width: 768px) {
     .book-detail-container {
-        padding: 1.5rem 1.25rem;
-        margin: 1rem;
-        max-width: 100%;
+        max-width: 95%;
+        padding: 2rem 1.5rem;
+        margin: 1rem auto;
         border-radius: 4px;
     }
-
-    .book-detail-container::before {
-        transform: translate(4px, 4px);
+    
+    .book-title {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
     }
-
-    .book-detail-container::after {
-        transform: translate(8px, 8px);
+    
+    .book-author {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
     }
-} */
+    
+    .book-page {
+        font-size: 1rem;
+        line-height: 1.5;
+        min-height: 400px;
+        padding: 0.5rem;
+    }
+    
+    .book-page p {
+        text-indent: 1.5rem;
+        margin-bottom: 0.7rem;
+    }
+    
+    .book-footer {
+        gap: 1rem;
+        padding-top: 0.5rem;
+    }
+    
+    .book-footer button {
+        padding: 0.3rem 0.8rem;
+        font-size: 1rem;
+    }
+    
+    .page-number {
+        font-size: 1rem;
+        min-width: 80px;
+    }
+}
+
+/* ============================================ */
+/* RESPONSIVE DESIGN - SMALL MOBILE */
+/* ============================================ */
+@media (max-width: 480px) {
+    .book-detail-container {
+        max-width: 100%;
+        padding: 1.5rem 1rem;
+        margin: 0.5rem;
+        border-radius: 4px;
+    }
+    
+    .book-title {
+        font-size: 1.5rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    .book-author {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+    
+    .book-page {
+        font-size: 0.95rem;
+        line-height: 1.5;
+        min-height: 350px;
+        padding: 0.3rem;
+    }
+    
+    .book-page p {
+        text-indent: 1rem;
+        margin-bottom: 0.6rem;
+    }
+    
+    .book-footer {
+        gap: 1.5rem;
+        padding-top: 0.4rem;
+        flex-wrap: wrap;
+    }
+    
+    .book-footer button {
+        padding: 0.3rem 0.8rem;
+        font-size: 1rem;
+        border-width: 1px;
+    }
+    
+    .page-number {
+        font-size: 0.9rem;
+        min-width: 70px;
+        order: -1;
+        width: 100%;
+        margin-bottom: 0.3rem;
+    }
+}
+
+/* ============================================ */
+/* LANDSCAPE MODE EN MOBILE */
+/* ============================================ */
+@media (max-width: 900px) and (orientation: landscape) {
+    .book-detail-container {
+        max-width: 90%;
+        padding: 1.5rem 2rem;
+        margin: 0.5rem auto;
+    }
+    
+    .book-page {
+        min-height: 250px;
+    }
+    
+    .book-title {
+        font-size: 1.6rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    .book-author {
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+    }
+}
