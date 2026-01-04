@@ -1,0 +1,201 @@
+@import url('./shared/shared-style.css');
+
+.bookshelf-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+}
+
+.shelf {
+    background: linear-gradient(180deg,#dfa477 0%, #cbb093 100%);
+    border-radius: 10px;
+    padding: 2rem;
+    margin-bottom: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+    /* border: 2px solid #e2af8b; */
+    position: relative;
+}
+
+.shelf::before {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    right: 0;
+    height: 15px;
+    background-image: url(./assets/wood-texture.jpg);
+    background-size: cover;
+    background-position: center;
+    border-radius: 0 0 5px 5px;
+    
+    /* Efecto 3D con sombras múltiples */
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.3),           /* Sombra cercana */
+        0 4px 8px rgba(0, 0, 0, 0.25),          /* Sombra media */
+        0 8px 16px rgba(0, 0, 0, 0.2),          /* Sombra lejana */
+        inset 0 1px 0 rgba(255, 255, 255, 0.1), /* Brillo superior */
+        inset 0 -1px 3px rgba(0, 0, 0, 0.3);    /* Profundidad inferior */
+    
+    /* Borde sutil para definir el grosor */
+    border-top: 1px solid rgba(101, 67, 33, 0.8);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    
+    /* Perspectiva adicional */
+    transform: perspective(500px) rotateX(-2deg);
+    transform-origin: top;
+}
+
+/* Opcional: añadir un bisel en el borde frontal */
+.shelf::after {
+    content: '';
+    position: absolute;
+    bottom: -16px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(0, 0, 0, 0.4) 10%, 
+        rgba(0, 0, 0, 0.4) 90%, 
+        transparent 100%);
+    border-radius: 0 0 5px 5px;
+}
+.book-card {
+    display: flex;
+    gap: 2rem;
+    background: #a4624d;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(139, 69, 19, 0.3);
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+}
+
+.book-cover {
+    flex-shrink: 0;
+    width: 150px;
+    height: 220px;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+    background: #1a1a1a;
+    border: 2px solid #8b4513;
+    perspective: 1000px;
+}
+
+.book-card:hover .book-cover img {
+    transform: rotateY(-18deg) scale(1.05);
+}
+
+.book-cover img {
+    transition: transform 0.4s ease;
+    transform-origin: left center;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.detail-link{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: #333;
+}
+.book-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.book-title {
+    font-size: 1.5rem;
+    color: #e2e3d7;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.book-author {
+    font-size: 1.1rem;
+    color: #302415;
+    margin-bottom: 0.5rem;
+    font-style: italic;
+}
+
+.book-meta {
+    font-size: 0.9rem;
+    color: #394e35;
+    margin-bottom: 1rem;
+}
+
+.book-description{
+    font-size: 0.95rem;
+    color: #ecdcbd;
+    line-height: 1.6;
+    margin-bottom: 5px;
+    flex-grow: 1;
+}
+
+.book-summary{
+    font-size: 0.9rem;
+    color: #dcd3c1;
+    line-height: 1.5;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .book-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .book-cover {
+        width: 180px;
+        height: 260px;
+    }
+}
+.prev-btn, .next-btn {
+    background-color: #92ada4;
+    color: #172015;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+.prev-btn:hover:not(:disabled), .next-btn:hover:not(:disabled) {
+    background-color:#3b4743 ;
+    transform: perspective(1.3 );
+    color: aliceblue;
+}
+.prev-btn:disabled, .next-btn:disabled {
+    background-color: #cccccc00;
+    color: #cccccc00;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.pagination-controls {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.page-info {
+    font-size: 16px;
+    color:#3b4743;
+    margin-left: 15px;
+}

@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Georgia', serif;
+    background: linear-gradient(135deg, #cbb093 0%, #dfa477 100%);
+    min-height: 100vh;
+    color: #f5e6d3;
+}
+
+header {
+    background: rgba(20, 10, 5, 0.9);
+    background-image: url('../assets/bookshelf-background.png');
+    background-size:contain;
+    background-position: center;
+    padding: 2rem;
+    text-align: center;
+    border-bottom: 3px solid #361803;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+header h1 {
+    font-size: 4rem;
+    color: #cdbb80;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    letter-spacing: 2px;
+}
