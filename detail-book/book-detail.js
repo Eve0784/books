@@ -23,7 +23,7 @@ container.appendChild(authorElem);
 
 const pageContainer = document.createElement('div');
 pageContainer.classList.add('book-page');
-pageContainer.innerHTML = '<p style="text-align:center; padding:3rem;">Cargando libro...</p>';
+pageContainer.innerHTML = '<p style="text-align:center; padding:3rem;">Loading book...</p>';
 container.appendChild(pageContainer);
 
 const footer = document.createElement('div');
@@ -167,7 +167,7 @@ function parseByParagraphs(text) {
     for (let i = 0; i < paragraphs.length; i += paragraphsPerPage) {
         const pageParagraphs = paragraphs.slice(i, i + paragraphsPerPage);
         pages.push({
-            title: `Página ${pages.length + 1}`,
+            title: `Page ${pages.length + 1}`,
             content: pageParagraphs.join('\n\n')
         });
     }
@@ -267,7 +267,7 @@ document.addEventListener('keydown', (e) => {
 getBookContent(bookId)
     .then(bookData => {
         if (!bookData) {
-            pageContainer.innerHTML = '<p style="color:red; text-align:center;">No se pudo cargar el contenido del libro</p>';
+            pageContainer.innerHTML = '<p style="color:red; text-align:center;">Book could not be loaded</p>';
             return;
         }
         
@@ -279,16 +279,16 @@ getBookContent(bookId)
         pages = structureBook(bookData.content);
         
         if (pages.length === 0) {
-            pageContainer.innerHTML = '<p style="color:red; text-align:center;">No se pudo estructurar el contenido del libro</p>';
+            pageContainer.innerHTML = '<p style="color:red; text-align:center;">Book content could not be structured</p>';
             return;
         }
         
-        console.log(`✅ Libro cargado: "${bookData.title}" - ${pages.length} capítulos/páginas`);
+        console.log(`✅Book loaded: "${bookData.title}" - ${pages.length} chapter/pages`);
         
         // Mostrar primera página
         showPage(0);
     })
     .catch(err => {
         console.error('Error:', err);
-        pageContainer.innerHTML = '<p style="color:red; text-align:center;">Error al cargar el libro</p>';
+        pageContainer.innerHTML = '<p style="color:red; text-align:center;">Error loading book</p>';
     });
