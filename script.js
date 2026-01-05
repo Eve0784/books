@@ -70,7 +70,7 @@ function displayBooks(books) {
     
         const detailLink = document.createElement('a');
         detailLink.classList.add('detail-link');
-        detailLink.href = `./detail-book/book-detail.html?bookId=${book.id}`;
+        detailLink.href = `./detail-book/detail.html?bookId=${book.id}`;
         detailLink.textContent = '➡️';
         bookCard.appendChild(detailLink);
 

@@ -1,4 +1,4 @@
-@import url('../shared/shared-style.css');
+@import url('../shared/shared.css');
 
 .book-detail-container {
     position: relative;
@@ -12,16 +12,16 @@
 }
 
 /* Título del libro */
-.book-title {
+ .book-title {
     text-align: center;
     margin-bottom: 0.5rem;
     font-size: 2.2rem;
     color: #222;
     font-family: 'Georgia', serif;
-}
+} 
 
 /* Autor del libro */
-.book-author {
+ .book-author {
     text-align: center;
     margin-bottom: 2rem;
     font-size: 1.2rem;
@@ -42,7 +42,7 @@
 }
 
 /* Estilo de párrafos dentro del contenido */
-.book-page p {
+ .book-page p {
     margin-bottom: 0.8rem;
     text-indent: 2rem;
     text-align: justify;
@@ -53,7 +53,7 @@
 }
 
 /* Footer con navegación */
-.book-footer {
+ .book-footer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -75,7 +75,7 @@
     font-weight: bold;
 }
 
-.book-footer button:hover:not(:disabled) {
+ .book-footer button:hover:not(:disabled) {
     background-color: #8b4513;
     color: #fdfaf5;
     transform: translateY(-2px);
@@ -99,7 +99,7 @@
 /* ============================================ */
 /* RESPONSIVE DESIGN - TABLET */
 /* ============================================ */
-@media (max-width: 1024px) {
+ @media (max-width: 1024px) {
     .book-detail-container {
         max-width: 85%;
         padding: 2.5rem 2rem;
@@ -123,7 +123,8 @@
 
 /* ============================================ */
 /* RESPONSIVE DESIGN - MOBILE */
-/* ============================================ */
+/* ============================================*/
+
 @media (max-width: 768px) {
     .book-detail-container {
         max-width: 95%;
@@ -173,6 +174,7 @@
 /* ============================================ */
 /* RESPONSIVE DESIGN - SMALL MOBILE */
 /* ============================================ */
+
 @media (max-width: 480px) {
     .book-detail-container {
         max-width: 100%;
@@ -227,6 +229,7 @@
 /* ============================================ */
 /* LANDSCAPE MODE EN MOBILE */
 /* ============================================ */
+
 @media (max-width: 900px) and (orientation: landscape) {
     .book-detail-container {
         max-width: 90%;
@@ -247,4 +250,26 @@
         font-size: 0.95rem;
         margin-bottom: 1rem;
     }
+}
+
+
+
+/* Scrollbar personalizada (ya no es necesaria pero la dejamos por si acaso) */
+.book-page::-webkit-scrollbar {
+    width: 8px;
+    display: none;
+}
+
+.book-page::-webkit-scrollbar-track {
+    background: #f1ede3;
+    border-radius: 4px;
+}
+
+.book-page::-webkit-scrollbar-thumb {
+    background: #c9b998;
+    border-radius: 4px;
+}
+
+.book-page::-webkit-scrollbar-thumb:hover {
+    background: #b8a77d;
 }

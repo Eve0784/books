@@ -292,3 +292,6 @@ getBookContent(bookId)
         console.error('Error:', err);
         pageContainer.innerHTML = '<p style="color:red; text-align:center;">Error loading book</p>';
     });
+
+
+//----------------------------------------------------------------------------------------------------------------------------------------//
