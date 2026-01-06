@@ -261,7 +261,7 @@ function parseByActsAndScenes(text) {
     const scenes = [];
     
     sceneMatches.forEach((match, index) => {
-        const sceneWord = match[1];
+        const sceneWord = match[1]; 
         const sceneNumber = match[2];
         const sceneLocation = match[3]?.trim();
         
@@ -479,9 +479,13 @@ function parseByParagraphsSimple(text) {
 /**
  * Estructura el contenido del libro
  */
+/**
+ * Estructura el contenido del libro
+ */
 function structureBook(plainText) {
     const cleanText = cleanGutenbergText(plainText);
     
+    // 1. Intentar formato de obra de teatro
     if (isPlayFormat(cleanText)) {
         console.log('🎭 Play format detected');
         const structure = parseByActsAndScenes(cleanText);
@@ -490,12 +494,27 @@ function structureBook(plainText) {
         }
     }
     
+    // 2. Intentar capítulos numerados (CHAPTER I, STAVE I, etc.)
     let structure = parseByChapters(cleanText);
-
-    if (!structure || structure.length === 0) {
-        console.log('⚠️ No chapters found, using paragraph-based pagination');
-        structure = parseByParagraphsSimple(cleanText);
+    if (structure && structure.length > 0) {
+        return structure;
     }
+
+    // 3. Intentar capítulos por títulos solamente (Dr. Jekyll style)
+    console.log('⚠️ No numbered chapters found, trying title-based parsing');
+    structure = parseByTitlesOnly(cleanText);
+    if (structure && structure.length > 0) {
+        // Convertir chapters a pages
+        const pages = [];
+        structure.forEach(chapter => {
+            pages.push(...divideChapterIntoPages(chapter));
+        });
+        return pages;
+    }
+
+    // 4. Fallback: dividir por párrafos
+    console.log('⚠️ No chapters or titles found, using paragraph-based pagination');
+    structure = parseByParagraphsSimple(cleanText);
 
     return structure;
 }
