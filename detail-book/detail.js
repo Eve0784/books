@@ -20,6 +20,12 @@ const titleElem = document.createElement('h2');
 titleElem.classList.add('book-title');
 container.appendChild(titleElem);
 
+const homelink = document.createElement('a');
+homelink.classList.add('actions');
+homelink.href = '../';
+homelink.textContent = '☗ ';
+container.appendChild(homelink);
+
 const authorElem = document.createElement('p');
 authorElem.classList.add('book-author');
 container.appendChild(authorElem);

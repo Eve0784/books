@@ -50,7 +50,10 @@ function displayBooks(books) {
 
         const bookMeta = document.createElement('p');
         bookMeta.classList.add('book-meta');
-        bookMeta.textContent = `ID: ${book.id} | Downloads: ${book.download_count || 0}`;
+        bookMeta.textContent = `Language: ${book.languages[0].toUpperCase()}  | ID: ${book.id} | Downloads: ${book.download_count || 0}`;
+
+        const bookLanguage = document.createElement('p')
+
 
         const bookDescription = document.createElement('p');
         bookDescription.classList.add('book-description');
@@ -69,7 +72,7 @@ function displayBooks(books) {
         shelf.appendChild(bookCard);
     
         const detailLink = document.createElement('a');
-        detailLink.classList.add('detail-link');
+        detailLink.classList.add('actions');
         detailLink.href = `./detail-book/detail.html?bookId=${book.id}`;
         detailLink.textContent = '➡️';
         bookCard.appendChild(detailLink);
